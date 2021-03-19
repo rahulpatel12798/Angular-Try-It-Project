@@ -1,0 +1,57 @@
+<!-- 
+product list template (html)
+-->
+
+<h2>Products</h2>
+
+<div *ngFor="let product of products">
+  <h3>
+    <a [title]="product.name + ' details'">
+      {{product.name}}
+    </a>
+  </h3>
+
+  <p *ngIf="product.description">
+    Description: {{product.description}}
+  </p>
+
+  <button (click)="share()">
+    Share
+  </button>
+
+  <app-product-alerts 
+  [product]="product" 
+  (notify)="onNotify()">
+  </app-product-alerts>
+</div>
+
+<!-- NOTES
+  
+  line 3: structural directive []
+  [    *ngFor="let product of products" >   ]
+      NgForOf: A structural directive that renders a template for each item in a collection. The directive is placed on an element, which becomes the parent of the cloned templates. 
+
+        Selectors:
+          [ngFor][ngForOf]
+    
+  line 5 : Angular's interpolation syntax.
+  [   {{product.name}} : {{product.price}}   ]
+      Inside the <div>, add an <h3> and {{ product.name }}. The {{ product.name }} statement is an example of Angular's interpolation syntax. Interpolation {{ }} lets you render the property value as text.
+
+  line 5
+  [ <a>  ]
+
+    To make each product name a link to product details, add the <a> element around {{ product.name }}.
+    
+    Set the title to be the product's name by using the property binding [ ] syntax, as follows:
+
+     Property binding [ ] lets you use the property value in a template expression.
+  
+  Line 10:
+  Add the product descriptions. On a <p> element, use an *ngIf directive so that Angular only creates the <p> element if the current product has a description.
+
+  Line 14: button (click) = "share()" >
+     Add a button so users can share a product. Bind the button's click event to the share() method in product-list.component.ts. Event binding uses a set of parentheses, ( ), around the event, as in the (click) event on the <button> element.
+
+
+  -->
